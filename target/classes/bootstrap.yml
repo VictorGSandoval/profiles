@@ -1,0 +1,10 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb://localhost:27018/profiles
+  application:
+    name: profiles-service
+  cloud:
+    config:
+      #enabled: true
+      uri: http://localhost:8081
