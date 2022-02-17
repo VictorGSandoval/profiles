@@ -36,6 +36,7 @@ public class ProfilesServiceImpl implements ProfilesService {
 
     @Override
     public Mono<Profiles> save(Profiles entity) {
+        entity.setStatus(true);
         return  profilesRepository.save(entity);
     }
 
@@ -44,6 +45,7 @@ public class ProfilesServiceImpl implements ProfilesService {
         return  profilesRepository.findById(entity.getId())
                 .switchIfEmpty(Mono.empty())
                 .flatMap(origin -> {
+                    origin.setId(entity.getId());
                     origin.setName(entity.getName());
                     origin.setStatus(entity.getStatus());
                     origin.setCodProfile(entity.getCodProfile());
@@ -65,6 +67,11 @@ public class ProfilesServiceImpl implements ProfilesService {
     @Override
     public Mono<Profiles> findById(String id) {
         return profilesRepository.findById(id);
+    }
+
+    @Override
+    public Mono<Profiles> findByCodProfile(String codProfile) {
+        return profilesRepository.findByCodProfile(codProfile);
     }
 
     @Override
